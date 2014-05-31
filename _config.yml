@@ -1,5 +1,5 @@
-name: FEX 百度 Web 前端研发部
-url: http://fex.baidu.com
+name: mop
+url: http://skyaspnet.github.io/
 source:      .
 destination: ./_site
 plugins:     ./_plugins
