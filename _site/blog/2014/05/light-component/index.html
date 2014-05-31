@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="跨端组件实践 - 移动时代的前端_FEX_做最专业的前端_百度前端研发部_百度前端团队Blog" />
+    <meta name="keywords" content="跨端组件实践 - 移动时代的前端,百度前端团队,FEX,百度FEX,百度前端,fex,百度前端研发,fis,前端模块化,前端工程,富应用开发,html5上传,前端数据监控,性能优化,web performance,编辑器,ueditor" />
+    <link rel="alternate" type="application/rss+xml" title="RSS" href="http://fex.baidu.com/feed.xml">
+    <title>跨端组件实践 - 移动时代的前端 FEX 做最专业的前端</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="baidu-site-verification" content="bUyKbVcNh2" />
+    <link rel="stylesheet" href="/public/css/normalize.css">
+    <link rel="stylesheet" href="/public/css/base.css">
+    <link rel="stylesheet" href="/public/css/fextm.css">
+</head>
+<body>
+<!--[if lt IE 8]>
+<p class="browsehappy">您使用的浏览器版本<strong>过老</strong>，请<a href="http://browsehappy.com/">使用最新的浏览器</a>来提升浏览体验。</p>
+<![endif]-->
+<div class="page-header">
+    <a href="/"><div class="logo"></div></a>
+    <ul class="page-nav page-navi-articles">
+        <li><a href="/">首页</a></li>
+        <li><a href="/articles/">技术</a></li>
+        <li><a href="/code.html">开源</a></li>
+        <!-- <li><a href="/team.html">团队</a></li> -->
+        <li><a href="/we-need-you/" target="_blank">我们需要你</a></li>
+        <li><a href="https://github.com/fex-team/" target="_blank">Github</a></li>
+        <li><a href="https://speakerdeck.com/baidufe" target="_blank">Slides</a></li>
+    </ul>
+    <a class="rss" target="_blank" href="http://fex.baidu.com/feed.xml"></a>
+</div>
+
+
+
+
+<link rel="stylesheet" href="/public/css/synatx.css">
+
+<div class="container">
+    <article>
+        <div class="article-info">
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+                <img src="/img/avatar/zswang.png" onerror="/img/avatar/fex.png" />
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            <h1 class="title">跨端组件实践 - 移动时代的前端</h1>
+            <div class="author">zswang | 01 May 2014</div>
+        </div>
+
+        <div class="content">
+        <h1>跨端组件实践 - 移动时代的前端</h1>
+
+<p>上周六在 <a href="http://www.qconbeijing.com/node/535">QCon</a> 分享了这个主题，说好的要有文档……</p>
+
+<h2>背景</h2>
+
+<h3>唯一不变的就是变化</h3>
+
+<p>从业十多年，互联网的变化非常大：最初使用的电脑只有 8M 内存、32M 硬盘，现在口袋里装的手机已经是 2G 内存、16G 闪存，网络也从 56K 变成了 1.5M+。这个时代的人是幸福的……</p>
+
+<p>这个期间也见证了 Web 时代的繁荣，从 C/S 走到 B/S。</p>
+
+<p>现在无论是邮件、购物还是游戏、社交、工作等等，在电脑上都能找到满意的 Web 应用或站点。</p>
+
+<blockquote>
+<ul>
+<li>购物：淘宝、京东、当当、苏宁易购 <a href="http://weibo.com/sharpmaster">@民工精髓V</a></li>
+<li>社交：<a href="http://tieba.baidu.com">贴吧</a>、<a href="http://weibo.com/">微博</a></li>
+<li>游戏：各种页游、我常玩的是 <a href="https://alliances.commandandconquer.com/">Web 红警</a></li>
+<li>办公：<a href="http://naotu.baidu.com/">脑图</a>、<a href="http://www.processon.com/">流程图</a>、<a href="http://today.ai/">日程安排</a>、<a href="https://github.com/">Github</a>、<a href="https://mail.google.com">邮件</a></li>
+</ul>
+</blockquote>
+
+<p>可是这种景象在移动时代并没有看到。</p>
+
+<p>现场小调查：请问你在手机上和 PC 上用什么方式刷微博？</p>
+
+<blockquote>
+<ul>
+<li>大部分的人不会在 PC 上用客户端刷微博</li>
+<li>大部分的人不会在手机上用浏览器刷微博</li>
+</ul>
+</blockquote>
+
+<p>结论符合预期，先从变化上分析问题</p>
+
+<h3>移动互联网发生了什么变化？</h3>
+
+<p>屏幕更小</p>
+
+<ul>
+<li>显示区更宝贵，广告区更难摆放</li>
+<li>页面布局更讲究，内容主次更为重要</li>
+</ul>
+
+<p>随身携带</p>
+
+<ul>
+<li>24 小时待机</li>
+<li>根据地理位置提供更精准的服务</li>
+</ul>
+
+<p>触摸操作</p>
+
+<ul>
+<li>双手很难并行</li>
+<li>虚拟键盘没有物理键盘便捷</li>
+</ul>
+
+<p>更丰富的内置设备</p>
+
+<ul>
+<li>前后置摄像头 / 闪关灯</li>
+<li>麦克风 / 扬声器</li>
+<li>振动器，静音状态也可以知道有消息到达</li>
+<li><a href="http://baike.baidu.com/view/154967.htm">电子指南针</a> / 陀螺仪</li>
+<li>蓝牙 / WiFi / <a href="http://baike.baidu.com/subview/917495/5282340.htm">NFC</a></li>
+</ul>
+
+<p>离线使用场景</p>
+
+<ul>
+<li>在没有信号</li>
+<li>资费不足</li>
+</ul>
+
+<p>没有持久能源</p>
+
+<ul>
+<li>电池需要充电</li>
+<li>计算能力和待机时间冲突</li>
+</ul>
+
+<p>设备碎片化
+* 特别是 <a href="http://baike.baidu.com/subview/1241829/9322617.htm">Android</a> 各种屏幕尺寸、各种 <a href="http://baike.baidu.com/view/7047904.htm">ROM</a></p>
+
+<p>移动互联网的变化带来了新的机遇和挑战</p>
+
+<h3>机遇</h3>
+
+<p>移动市场高速增长</p>
+
+<blockquote>
+<p>艾瑞咨询数据显示，2013 年中国移动互联网市场规模达到 <code>1059.8</code> 亿元，同比增速 <code>81.2%</code>， 预计到 2017 年，市场规模将增长约 <code>4.5</code> 倍，接近 <code>6000</code> 亿。移动互联正在深刻影响人们的日常生活，移动互联网市场进入高速发展通道。<a href="http://www.techweb.com.cn/data/2014-01-20/1383076.shtml">【查看来源】</a></p>
+</blockquote>
+
+<h3>挑战</h3>
+
+<p>HTML5 / CSS3 技术在移动端受限</p>
+
+<p>What stops developers from using HTML5？<a href="http://www.visionmobile.com/blog/2013/12/html5-performance-is-fine-what-we-are-missing-is-tools/">【查看来源】</a></p>
+
+<p><img src="/img/light-component/webapp-issue.png" alt="性能测试"></p>
+
+<blockquote>
+<p>为什么开发者不选择 HTML5 构建移动应用？
+前三个原因是：</p>
+
+<ul>
+<li>性能问题，流畅度与 Native 差距较大</li>
+<li>硬件接口缺失，不能控制蓝牙、闪关灯、振动、WiFi、<a href="http://baike.baidu.com/subview/917495/5282340.htm">NFC</a> 等等</li>
+<li>难以集成本地元素，不能使用桌面图标、订阅推送等</li>
+</ul>
+</blockquote>
+
+<p>这是我们用主流的机型做的性能测试</p>
+
+<p><img src="/img/light-component/native-vs-web.png" alt="性能测试"></p>
+
+<p>不难看出 Native 和 Web 的性能依旧差距很大，包括主流韩国和国产机型。</p>
+
+<p>人眼刷新率平均是 24 帧 / 秒，低于这个值用户就会感觉到跳帧。</p>
+
+<p>当然这些问题在 PC 时代也碰到过！那时是怎么解决的？</p>
+
+<h3>影响前端的技术</h3>
+
+<p>通过浏览器扩展本地能力</p>
+
+<ul>
+<li>使用 <a href="http://baike.baidu.com/view/28141.htm">ActiveX</a> / <a href="http://zh.wikipedia.org/wiki/NPAPI">NPAPI</a> 技术</li>
+<li>最经典的插件就是 Flash，虽然它已经淡出了移动时代</li>
+</ul>
+
+<p>JavaScript Engine 进化</p>
+
+<ul>
+<li>V8 出现后，JavaScript 的性能提升了数倍</li>
+<li>结合高性能的引擎 NodeJS 也使 JavaScript 在后端获得了新生</li>
+</ul>
+
+<p><a href="http://baike.baidu.com/view/951383.htm">HTML5</a> / CSS3</p>
+
+<ul>
+<li>扩展了本地能力，如地理定位、录音录像、本地存储等</li>
+</ul>
+
+<p>但这些影响在移动端是有限的</p>
+
+<h3>移动时代前端的现状</h3>
+
+<p>Flash 不能使用</p>
+
+<blockquote>
+<p><a href="http://www.cnbeta.com/articles/161452.htm">Adobe 将停止开发移动版 Flash</a></p>
+</blockquote>
+
+<p>NPAPI 即将退役</p>
+
+<blockquote>
+<p>Google 今年开始屏蔽 NPAPI 插件<a href="http://techcrunch.cn/2013/09/24/say-goodbye-to-npapi/">【查看来源】</a></p>
+
+<ul>
+<li>Google 网络商店不会再接受任何包含基于 NPAPI 插件的新应用或拓展。</li>
+<li>对于需要 NPAPI 替代品的开发者，Google 推荐转向 <a href="https://developers.google.com/native-client/">NaCl</a>、<a href="http://developer.chrome.com/apps/">Apps</a>、<a href="http://developer.chrome.com/extensions/messaging.html#native-messaging">原生消息 API</a> 和<a href="https://support.google.com/chrome/a/answer/3019558">旧版浏览器支持</a>。</li>
+</ul>
+</blockquote>
+
+<p>浏览器插件可以扩展本地能力的同时，也会带来稳定性和安全性的问题。</p>
+
+<h3>怎么解决性能瓶颈和本地能力缺失的问题？</h3>
+
+<p>JS Binding，通过 JavaScript 直接调用 Native API</p>
+
+<ul>
+<li>从 iOS7 开始，可以使用 <a href="https://developer.apple.com/library/mac/documentation/Carbon/Reference/WebKit_JavaScriptCore_Ref/_index.html">JavaScriptCore</a> 接口</li>
+<li>常见的框架和技术
+
+<ul>
+<li><a href="http://www.cocos2d-x.org/">Cocos2D</a></li>
+<li><a href="http://impactjs.com/ejecta">Ejecta</a></li>
+<li><a href="https://www.ludei.com/">CoconJS</a></li>
+<li><a href="http://nodeapp.org/">Node.app</a></li>
+</ul></li>
+</ul>
+
+<p>JS Translate，通过编译器将 JavaScript 翻译成 Native 语言</p>
+
+<ul>
+<li>如号称上帝语言的 <a href="http://haxe.org/">haXe</a> 可以翻译成 Java、JavaScript、C++、PHP 的语言</li>
+</ul>
+
+<p>Native App，直接使用 Native 技术，从头再来</p>
+
+<ul>
+<li>广义的前端就是要面向用户界面和交互</li>
+<li>前端技术也有向全端和全栈的发展趋势</li>
+</ul>
+
+<blockquote>
+<p>选择手游创业的 <a href="http://weibo.com/finscn">@大城小胖</a> 近期做了一个教学视频，专门介绍 JSBinding 大家可以参考：<a href="http://www.imooc.com/view/92">When iOS loves JS</a></p>
+
+<ul>
+<li>PC 时代 JSBinding 可以用 <a href="http://t.cn/8suz2Q0">MSScriptControl</a></li>
+</ul>
+</blockquote>
+
+<p>以上技术可以解决问题，但不能发挥 Web 自然跨端、迭代方便（不同等待漫长的上架时间）的优势</p>
+
+<p>我们还得寻找一些适合自己的方案。</p>
+
+<h3>Hybrid 混合应用方案</h3>
+
+<p>本地服务，网页通过 HTTP / <a href="http://baike.baidu.com/view/3623887.htm">WebSocket</a> 与本地服务通信，使用本地能力</p>
+
+<p><img src="/img/light-component/local-service.png" alt="本地服务"></p>
+
+<ul>
+<li>在 Android 里写一个不难，参考 <a href="http://nanohttpd.com/">NanoHttpd</a> DIY 一个移动版的 HTTP 服务
+
+<ul>
+<li>优势：能够无缝兼容所有浏览器</li>
+<li>劣势：通信容易被嗅探和伪造；很难利用 UI 组件</li>
+</ul></li>
+</ul>
+
+<p>加壳，这是最常用的技术</p>
+
+<p><img src="/img/light-component/shell.png" alt="加壳"></p>
+
+<ul>
+<li>有较成熟的框架可以使用，如：<a href="http://cordova.apache.org/">Cordova</a></li>
+<li>通过使用和扩展插件，获得本地能力</li>
+</ul>
+
+<blockquote>
+<p>Google 也有投入 Cordova 的项目 <a href="https://github.com/MobileChromeApps/mobile-chrome-apps">Chrome apps on Android and iOS</a></p>
+</blockquote>
+
+<p>本地服务和加壳方式，都能访问本地能力。但后者本地能力在同一个进程里调度，安全性和便利性相对要高。</p>
+
+<h3>回到主题，什么是跨端组件？</h3>
+
+<p>自动响应端能力的组件</p>
+
+<p><img src="/img/light-component/light-component-ui.png" alt="跨端组件示意"></p>
+
+<ul>
+<li>受到<a href="http://baike.baidu.com/view/9876268.htm">响应式网页设计</a>理念的启发，界面布局可以根据运行环境自动响应和调整，那么本地能力也可以这样</li>
+<li>如在普通浏览器里使用 HTML5 / CSS3 构造组件，在提供本地能力的环境里使用 Native View 构造组件。</li>
+<li>在提供本地能力的环境里，界面会更流畅；在没有本地能力的环境里应用是完整的。</li>
+</ul>
+
+<p>跨端组件解决的问题：</p>
+
+<ul>
+<li>满足 UI 需要局部流畅的需求</li>
+<li>满足运行在各种环境的需求</li>
+</ul>
+
+<p>特点</p>
+
+<ul>
+<li>同一套 API</li>
+<li>更好地使用运行环境提供的能力</li>
+</ul>
+
+<blockquote>
+<p>PC 时代也有这样的组件，如：<a href="http://raphaeljs.com/">Raphaël</a> 一款矢量图组件，在具 VML 的环境里使用 VML，其他环境里使用 SVG，并保持同一套 API。发散一想：<a href="http://jquery.com">jQuery</a>、<a href="https://github.com/fex-team/webuploader">WebUploader</a>（适配 Flash 和 HTML5）也都是自动响应各种运行环境。</p>
+</blockquote>
+
+<p>成本总是伴随着收益，解决老问题就会带来新的问题</p>
+
+<p>当页面发生滚动时，Native View 怎么和网页元素一起滚动？还有 <a href="http://www-archive.mozilla.org/newlayout/doc/reflow.html">Reflow</a> 时怎么调整 Native View 的位置?</p>
+
+<h3>UI 融合的问题</h3>
+
+<p>滚动的问题在 Android 中处理比较方便。因为 WebView 继承至：ViewGroup / <a href="http://developer.android.com/reference/android/widget/AbsoluteLayout.html">AbsoluteLayout</a>，我们只需要将 WebView 作为 Native View 的容器就可以搞定这个问题。</p>
+
+<p>Reflow 发生的频率不高，就用了定时器这种简单粗暴的方法</p>
+
+<h3>跨端组件研发的步骤</h3>
+
+<h4>确定需求</h4>
+
+<h5>哪些组件适合做跨端组件？</h5>
+
+<p>计算量大，需要流畅</p>
+
+<ul>
+<li>图册浏览</li>
+<li>地图</li>
+<li>多媒体播放器</li>
+<li>3D渲染</li>
+<li>图像识别，二维码识别、手势识别</li>
+</ul>
+
+<p>减少操作步骤，省去授权</p>
+
+<ul>
+<li>录像、录音</li>
+</ul>
+
+<p>HTML5能力增强</p>
+
+<ul>
+<li>地理定位增强，结合 WiFi</li>
+<li>Canvas 性能增强（参考：<a href="https://github.com/phonegap/phonegap-plugin-fast-canvas">FastCanvas</a>）</li>
+</ul>
+
+<h4>开发环境</h4>
+
+<ul>
+<li>Android / <a href="http://developer.android.com/tools/building/building-cmdline.html">ANT</a>、iOS 环境搭建</li>
+<li>安装 <a href="https://www.npmjs.org/">NPM</a></li>
+<li>安装 Cordova 参考：<a href="http://cordova.apache.org/docs/en/edge/guide_cli_index.md.html">命令行文档</a></li>
+</ul>
+
+<blockquote>
+<p>天朝的网络大家知道的，主要找一些代理和镜像</p>
+</blockquote>
+
+<h4>设计 API</h4>
+
+<p>发现很多前端团队都开始使用和关注 <a href="http://www.w3.org/TR/components-intro/">Web Components</a></p>
+
+<p>在跨端组件的落地上，我们也选择这种方式来提供 API，原因是：</p>
+
+<ul>
+<li>降低学习成本，保留原生 Web 组件的使用方式</li>
+<li>降低业务代码维护工作</li>
+</ul>
+
+<blockquote>
+<p>目前移动端原生还不支持这个标准，还得选用框架适配，如：<a href="http://www.polymer-project.org">Polymer</a></p>
+</blockquote>
+
+<p>跨端组件 HTML5 示例代码：</p>
+<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;body&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;mapBox&quot;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;light-map</span> <span class="na">width=</span><span class="s">&quot;350&quot;</span> <span class="na">height=</span><span class="s">&quot;400&quot;</span> <span class="na">center=</span><span class="s">&quot;116.404,39.915&quot;</span> <span class="na">zoom=</span><span class="s">&quot;11&quot;</span><span class="nt">&gt;&lt;/light-map&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+</code></pre></div>
+<p>将组件的HTML部分放到需要显示的位置，然后就和普通的Element一样使用：</p>
+
+<ul>
+<li><code>var lightMap = document.querySelector(&#39;light-map&#39;);</code> 可以通过 DOM 树操作</li>
+<li><code>lightMap.addEventLister()</code> 添加事件</li>
+<li><code>lightMap.setAttribute()、lightMap.getAttribute()</code> 设置属性</li>
+</ul>
+
+<h4>组件开发</h4>
+
+<p>Cordova Plugin 开发</p>
+
+<p>plugin.xml 配置需要的权限、JavaScript 命名空间、文件对应的工程目录等待。细节请参考<a href="http://docs.phonegap.com/en/3.0.0/plugin_ref_spec.md.html">官方文档</a></p>
+<div class="highlight"><pre><code class="language-xml" data-lang="xml"><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="nt">&lt;plugin</span> <span class="na">xmlns=</span><span class="s">&quot;http://apache.org/cordova/ns/plugins/1.0&quot;</span>
+      <span class="na">id=</span><span class="s">&quot;com.baidu.light.flashlight&quot;</span>
+      <span class="na">version=</span><span class="s">&quot;0.2.7&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;name&gt;</span>Flashlight<span class="nt">&lt;/name&gt;</span>
+    <span class="nt">&lt;description&gt;</span>Cordova Flashlight Plugin<span class="nt">&lt;/description&gt;</span>
+    <span class="nt">&lt;license&gt;</span>Apache 2.0<span class="nt">&lt;/license&gt;</span>
+    <span class="nt">&lt;keywords&gt;</span>cordova,battery<span class="nt">&lt;/keywords&gt;</span>
+    <span class="nt">&lt;repo&gt;</span>https://github.com/zswang/light-flashlight.git<span class="nt">&lt;/repo&gt;</span>
+    <span class="nt">&lt;issue&gt;</span>https://github.com/zswang/light-flashlight/issue<span class="nt">&lt;/issue&gt;</span>
+
+    <span class="nt">&lt;js-module</span> <span class="na">src=</span><span class="s">&quot;www/flashlight.js&quot;</span> <span class="na">name=</span><span class="s">&quot;flashlight&quot;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;clobbers</span> <span class="na">target=</span><span class="s">&quot;light.flashlight&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/js-module&gt;</span>
+    <span class="c">&lt;!-- android --&gt;</span>
+    <span class="nt">&lt;platform</span> <span class="na">name=</span><span class="s">&quot;android&quot;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;config-file</span> <span class="na">target=</span><span class="s">&quot;res/xml/config.xml&quot;</span> <span class="na">parent=</span><span class="s">&quot;/*&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;feature</span> <span class="na">name=</span><span class="s">&quot;Flashlight&quot;</span> <span class="nt">&gt;</span>
+                <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">&quot;android-package&quot;</span> <span class="na">value=</span><span class="s">&quot;com.baidu.light.flashlight.Flashlight&quot;</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;/feature&gt;</span>
+        <span class="nt">&lt;/config-file&gt;</span>
+
+        <span class="nt">&lt;config-file</span> <span class="na">target=</span><span class="s">&quot;AndroidManifest.xml&quot;</span> <span class="na">parent=</span><span class="s">&quot;/*&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;uses-permission</span> <span class="na">android:name=</span><span class="s">&quot;android.permission.CAMERA&quot;</span> <span class="nt">/&gt;</span>
+            <span class="nt">&lt;uses-permission</span> <span class="na">android:name=</span><span class="s">&quot;android.permission.FLASHLIGHT&quot;</span> <span class="nt">/&gt;</span>
+        <span class="nt">&lt;/config-file&gt;</span>
+
+        <span class="nt">&lt;source-file</span> <span class="na">src=</span><span class="s">&quot;src/android/Flashlight.java&quot;</span> <span class="na">target-dir=</span><span class="s">&quot;src/com/baidu/light/flashlight&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/platform&gt;</span>
+<span class="nt">&lt;/plugin&gt;</span>
+</code></pre></div>
+<p>我就自己写一个<a href="https://github.com/zswang/light-flashlight">闪光灯插件</a> 实现非常简单，供大家参考</p>
+
+<ul>
+<li>JavaScript 关键部分</li>
+</ul>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">cordova</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;cordova&#39;</span><span class="p">),</span>
+    <span class="nx">exec</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;cordova/exec&#39;</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">flashlight</span> <span class="o">=</span> <span class="nx">flashlight</span> <span class="o">||</span> <span class="p">{};</span>
+
+<span class="kd">function</span> <span class="nx">torch</span><span class="p">(</span><span class="nx">successCallback</span><span class="p">,</span> <span class="nx">errorCallback</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">exec</span><span class="p">(</span><span class="nx">successCallback</span><span class="p">,</span> <span class="nx">errorCallback</span><span class="p">,</span> <span class="s1">&#39;Flashlight&#39;</span><span class="p">,</span> <span class="s1">&#39;torch&#39;</span><span class="p">,</span> <span class="p">[]);</span> <span class="c1">// 调用 Native 的提供的方法，指定回调、Native 对应的类名和动作</span>
+<span class="p">};</span>
+
+<span class="nx">flashlight</span><span class="p">.</span><span class="nx">torch</span> <span class="o">=</span> <span class="nx">torch</span><span class="p">;</span>
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="nx">flashlight</span><span class="p">;</span>
+</code></pre></div>
+<ul>
+<li>Android 关键部分</li>
+</ul>
+<div class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Flashlight</span> <span class="kd">extends</span> <span class="n">CordovaPlugin</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="n">Camera</span> <span class="n">mCamera</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">execute</span><span class="o">(</span><span class="n">String</span> <span class="n">action</span><span class="o">,</span> <span class="n">JSONArray</span> <span class="n">args</span><span class="o">,</span>
+            <span class="n">CallbackContext</span> <span class="n">callbackContext</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">JSONException</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">mCamera</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">mCamera</span> <span class="o">=</span> <span class="n">Camera</span><span class="o">.</span><span class="na">open</span><span class="o">();</span>
+        <span class="o">}</span>
+        <span class="k">if</span> <span class="o">(</span><span class="s">&quot;torch&quot;</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">action</span><span class="o">))</span> <span class="o">{</span> <span class="c1">// 打开手电的动作</span>
+            <span class="n">Parameters</span> <span class="n">parameters</span> <span class="o">=</span> <span class="n">mCamera</span><span class="o">.</span><span class="na">getParameters</span><span class="o">();</span>
+            <span class="n">parameters</span><span class="o">.</span><span class="na">setFlashMode</span><span class="o">(</span><span class="n">Parameters</span><span class="o">.</span><span class="na">FLASH_MODE_TORCH</span><span class="o">);</span>
+            <span class="n">mCamera</span><span class="o">.</span><span class="na">setParameters</span><span class="o">(</span><span class="n">parameters</span><span class="o">);</span> 
+            <span class="n">callbackContext</span><span class="o">.</span><span class="na">success</span><span class="o">(</span><span class="kc">null</span><span class="o">);</span> <span class="c1">// 回调 JavaScript</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div>
+<p>百度地图 提供了 Android、JS、iOS 三个版本，正好适合用来做<a href="https://github.com/zswang/light-map">地图跨端组件</a></p>
+
+<ul>
+<li>地图跨度组件 Cordova Plugin JavaScript 部分</li>
+</ul>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">cordova</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;cordova&#39;</span><span class="p">),</span>
+    <span class="nx">exec</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;cordova/exec&#39;</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">baidumap</span> <span class="o">=</span> <span class="nx">baidumap</span> <span class="o">||</span> <span class="p">{};</span>
+
+<span class="cm">/**</span>
+<span class="cm"> * 初始化</span>
+<span class="cm"> * @param{Object} options 配置项，显示位置</span>
+<span class="cm"> * @param{Function} callback 回调</span>
+<span class="cm"> */</span>
+<span class="kd">function</span> <span class="nx">init</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">exec</span><span class="p">(</span><span class="nx">callback</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="p">},</span> <span class="s1">&#39;BaiduMap&#39;</span><span class="p">,</span> <span class="s1">&#39;init&#39;</span><span class="p">,</span> <span class="p">[</span><span class="nx">options</span><span class="p">]);</span>
+<span class="p">};</span>
+
+<span class="nx">baidumap</span><span class="p">.</span><span class="nx">init</span> <span class="o">=</span> <span class="nx">init</span><span class="p">;</span>
+
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="nx">baidumap</span><span class="p">;</span>
+</code></pre></div>
+<ul>
+<li>地图跨度组件 Cordova Plugin Android 部分</li>
+</ul>
+<div class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">BaiduMap</span> <span class="kd">extends</span> <span class="n">CordovaPlugin</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="n">CallbackContext</span> <span class="n">mCallbackContext</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+
+    <span class="nd">@SuppressWarnings</span><span class="o">(</span><span class="s">&quot;unchecked&quot;</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">execute</span><span class="o">(</span><span class="n">String</span> <span class="n">action</span><span class="o">,</span> <span class="n">JSONArray</span> <span class="n">args</span><span class="o">,</span>
+            <span class="n">CallbackContext</span> <span class="n">callbackContext</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">JSONException</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="s">&quot;init&quot;</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">action</span><span class="o">))</span> <span class="o">{</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">args</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+                <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+            <span class="o">}</span>
+
+            <span class="n">JSONObject</span> <span class="n">params</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="na">optJSONObject</span><span class="o">(</span><span class="mi">0</span><span class="o">);</span>
+            <span class="n">JSONArray</span> <span class="n">center</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="na">optJSONArray</span><span class="o">(</span><span class="s">&quot;center&quot;</span><span class="o">);</span>
+            <span class="c1">// Native View 在页面中的显示区域</span>
+            <span class="kt">int</span> <span class="n">left</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="na">optInt</span><span class="o">(</span><span class="s">&quot;left&quot;</span><span class="o">);</span>
+            <span class="kt">int</span> <span class="n">top</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="na">optInt</span><span class="o">(</span><span class="s">&quot;top&quot;</span><span class="o">);</span>
+            <span class="kt">int</span> <span class="n">width</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="na">optInt</span><span class="o">(</span><span class="s">&quot;width&quot;</span><span class="o">);</span>
+            <span class="kt">int</span> <span class="n">height</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="na">optInt</span><span class="o">(</span><span class="s">&quot;height&quot;</span><span class="o">);</span>
+            <span class="n">String</span> <span class="n">guid</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="na">optString</span><span class="o">(</span><span class="s">&quot;id&quot;</span><span class="o">);</span>
+            <span class="kt">int</span> <span class="n">zoom</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="na">optInt</span><span class="o">(</span><span class="s">&quot;zoom&quot;</span><span class="o">);</span>
+            <span class="n">createMap</span><span class="o">(</span><span class="n">guid</span><span class="o">,</span> <span class="n">left</span><span class="o">,</span> <span class="n">top</span><span class="o">,</span> <span class="n">width</span><span class="o">,</span> <span class="n">height</span><span class="o">,</span>
+                    <span class="o">(</span><span class="kt">float</span><span class="o">)</span> <span class="n">center</span><span class="o">.</span><span class="na">optDouble</span><span class="o">(</span><span class="mi">0</span><span class="o">),</span> <span class="o">(</span><span class="kt">float</span><span class="o">)</span> <span class="n">center</span><span class="o">.</span><span class="na">optDouble</span><span class="o">(</span><span class="mi">1</span><span class="o">),</span>
+                    <span class="n">zoom</span><span class="o">);</span>
+            <span class="n">mCallbackContext</span> <span class="o">=</span> <span class="n">callbackContext</span><span class="o">;</span>
+
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">private</span> <span class="kd">static</span> <span class="n">Handler</span> <span class="n">mHandler</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Handler</span><span class="o">(</span><span class="n">Looper</span><span class="o">.</span><span class="na">getMainLooper</span><span class="o">());</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="n">Hashtable</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">MapView</span><span class="o">&gt;</span> <span class="n">mMaps</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Hashtable</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">MapView</span><span class="o">&gt;();</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">initialize</span><span class="o">(</span><span class="n">CordovaInterface</span> <span class="n">cordova</span><span class="o">,</span> <span class="n">CordovaWebView</span> <span class="n">webView</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">super</span><span class="o">.</span><span class="na">initialize</span><span class="o">(</span><span class="n">cordova</span><span class="o">,</span> <span class="n">webView</span><span class="o">);</span>
+        <span class="c1">// 初始化百度地图 Android 版本</span>
+        <span class="n">BMapManager</span> <span class="n">baiduMapManager</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BMapManager</span><span class="o">(</span><span class="n">webView</span><span class="o">.</span><span class="na">getContext</span><span class="o">()</span>
+                <span class="o">.</span><span class="na">getApplicationContext</span><span class="o">());</span>
+        <span class="n">baiduMapManager</span><span class="o">.</span><span class="na">init</span><span class="o">(</span><span class="k">new</span> <span class="n">MKGeneralListener</span><span class="o">()</span> <span class="o">{</span>
+            <span class="nd">@Override</span>
+            <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onGetNetworkState</span><span class="o">(</span><span class="kt">int</span> <span class="n">state</span><span class="o">)</span> <span class="o">{</span>
+            <span class="o">}</span>
+
+            <span class="nd">@Override</span>
+            <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onGetPermissionState</span><span class="o">(</span><span class="kt">int</span> <span class="n">state</span><span class="o">)</span> <span class="o">{</span>
+            <span class="o">}</span>
+        <span class="o">});</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">createMap</span><span class="o">(</span><span class="n">String</span> <span class="n">guid</span><span class="o">,</span> <span class="kt">int</span> <span class="n">left</span><span class="o">,</span> <span class="kt">int</span> <span class="n">top</span><span class="o">,</span> <span class="kt">int</span> <span class="n">width</span><span class="o">,</span>
+            <span class="kt">int</span> <span class="n">height</span><span class="o">,</span> <span class="kt">float</span> <span class="n">lng</span><span class="o">,</span> <span class="kt">float</span> <span class="n">lat</span><span class="o">,</span> <span class="kt">int</span> <span class="n">zoom</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">mHandler</span><span class="o">.</span><span class="na">post</span><span class="o">(</span><span class="k">new</span> <span class="n">Runnable</span><span class="o">()</span> <span class="o">{</span> <span class="c1">// 注意 JavaScript 调用 Native 会在子线程，如果操作 UI 需放到 主线程中</span>
+            <span class="kd">private</span> <span class="n">String</span> <span class="n">mGuid</span><span class="o">;</span>
+            <span class="kd">private</span> <span class="kt">int</span> <span class="n">mLeft</span><span class="o">;</span>
+            <span class="kd">private</span> <span class="kt">int</span> <span class="n">mTop</span><span class="o">;</span>
+            <span class="kd">private</span> <span class="kt">int</span> <span class="n">mWidth</span><span class="o">;</span>
+            <span class="kd">private</span> <span class="kt">int</span> <span class="n">mHeight</span><span class="o">;</span>
+            <span class="kd">private</span> <span class="kt">float</span> <span class="n">mLng</span><span class="o">;</span>
+            <span class="kd">private</span> <span class="kt">float</span> <span class="n">mLat</span><span class="o">;</span>
+            <span class="kd">private</span> <span class="kt">int</span> <span class="n">mZoom</span><span class="o">;</span>
+
+            <span class="kd">public</span> <span class="n">Runnable</span> <span class="nf">config</span><span class="o">(</span><span class="n">String</span> <span class="n">guid</span><span class="o">,</span> <span class="kt">int</span> <span class="n">left</span><span class="o">,</span> <span class="kt">int</span> <span class="n">top</span><span class="o">,</span> <span class="kt">int</span> <span class="n">width</span><span class="o">,</span>
+                    <span class="kt">int</span> <span class="n">height</span><span class="o">,</span> <span class="kt">float</span> <span class="n">lng</span><span class="o">,</span> <span class="kt">float</span> <span class="n">lat</span><span class="o">,</span> <span class="kt">int</span> <span class="n">zoom</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">mGuid</span> <span class="o">=</span> <span class="n">guid</span><span class="o">;</span>
+                <span class="n">mLeft</span> <span class="o">=</span> <span class="n">left</span><span class="o">;</span>
+                <span class="n">mTop</span> <span class="o">=</span> <span class="n">top</span><span class="o">;</span>
+                <span class="n">mHeight</span> <span class="o">=</span> <span class="n">height</span><span class="o">;</span>
+                <span class="n">mWidth</span> <span class="o">=</span> <span class="n">width</span><span class="o">;</span>
+                <span class="n">mLng</span> <span class="o">=</span> <span class="n">lng</span><span class="o">;</span>
+                <span class="n">mLat</span> <span class="o">=</span> <span class="n">lat</span><span class="o">;</span>
+                <span class="n">mZoom</span> <span class="o">=</span> <span class="n">zoom</span><span class="o">;</span>
+                <span class="k">return</span> <span class="k">this</span><span class="o">;</span>
+            <span class="o">}</span>
+
+            <span class="nd">@SuppressWarnings</span><span class="o">(</span><span class="s">&quot;deprecation&quot;</span><span class="o">)</span>
+            <span class="nd">@Override</span>
+            <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
+                <span class="n">MapView</span> <span class="n">mapView</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MapView</span><span class="o">(</span><span class="n">BaiduMap</span><span class="o">.</span><span class="na">this</span><span class="o">.</span><span class="na">webView</span>
+                        <span class="o">.</span><span class="na">getContext</span><span class="o">());</span>
+                <span class="n">MapController</span> <span class="n">mapController</span> <span class="o">=</span> <span class="n">mapView</span><span class="o">.</span><span class="na">getController</span><span class="o">();</span>
+                <span class="n">GeoPoint</span> <span class="n">point</span> <span class="o">=</span> <span class="k">new</span> <span class="n">GeoPoint</span><span class="o">((</span><span class="kt">int</span><span class="o">)</span> <span class="o">(</span><span class="n">mLat</span> <span class="o">*</span> <span class="mi">1</span><span class="n">E6</span><span class="o">),</span>
+                        <span class="o">(</span><span class="kt">int</span><span class="o">)</span> <span class="o">(</span><span class="n">mLng</span> <span class="o">*</span> <span class="mi">1</span><span class="n">E6</span><span class="o">));</span>
+                <span class="n">mapController</span><span class="o">.</span><span class="na">setCenter</span><span class="o">(</span><span class="n">point</span><span class="o">);</span>
+                <span class="n">mapController</span><span class="o">.</span><span class="na">setZoom</span><span class="o">(</span><span class="n">mZoom</span><span class="o">);</span>
+
+                <span class="kt">float</span> <span class="n">scale</span> <span class="o">=</span> <span class="n">BaiduMap</span><span class="o">.</span><span class="na">this</span><span class="o">.</span><span class="na">webView</span><span class="o">.</span><span class="na">getScale</span><span class="o">();</span>
+
+                <span class="n">LayoutParams</span> <span class="n">params</span> <span class="o">=</span> <span class="k">new</span> <span class="n">LayoutParams</span><span class="o">((</span><span class="kt">int</span><span class="o">)</span> <span class="o">(</span><span class="n">mWidth</span> <span class="o">*</span> <span class="n">scale</span><span class="o">),</span>
+                        <span class="o">(</span><span class="kt">int</span><span class="o">)</span> <span class="o">(</span><span class="n">mHeight</span> <span class="o">*</span> <span class="n">scale</span><span class="o">),</span> <span class="o">(</span><span class="kt">int</span><span class="o">)</span> <span class="o">(</span><span class="n">mLeft</span> <span class="o">*</span> <span class="n">scale</span><span class="o">),</span>
+                        <span class="o">(</span><span class="kt">int</span><span class="o">)</span> <span class="o">(</span><span class="n">mTop</span> <span class="o">*</span> <span class="n">scale</span><span class="o">));</span>
+                <span class="n">mapView</span><span class="o">.</span><span class="na">setLayoutParams</span><span class="o">(</span><span class="n">params</span><span class="o">);</span>
+                <span class="n">BaiduMap</span><span class="o">.</span><span class="na">this</span><span class="o">.</span><span class="na">webView</span><span class="o">.</span><span class="na">addView</span><span class="o">(</span><span class="n">mapView</span><span class="o">);</span> <span class="c1">// 大家注意这一句，将 Native View 添加在 WebView 上，自然就响应页面滚动</span>
+
+                <span class="n">mMaps</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">mGuid</span><span class="o">,</span> <span class="n">mapView</span><span class="o">);</span>
+            <span class="o">}</span>
+
+        <span class="o">}.</span><span class="na">config</span><span class="o">(</span><span class="n">guid</span><span class="o">,</span> <span class="n">left</span><span class="o">,</span> <span class="n">top</span><span class="o">,</span> <span class="n">width</span><span class="o">,</span> <span class="n">height</span><span class="o">,</span> <span class="n">lng</span><span class="o">,</span> <span class="n">lat</span><span class="o">,</span> <span class="n">zoom</span><span class="o">));</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div>
+<ul>
+<li>Web Component，注意适配 runtime 环境</li>
+</ul>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="k">void</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">instances</span> <span class="o">=</span> <span class="p">{};</span>
+    <span class="kd">var</span> <span class="nx">guid</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+    <span class="kd">var</span> <span class="nx">LightMapPrototype</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">HTMLDivElement</span><span class="p">.</span><span class="nx">prototype</span><span class="p">);</span>
+    <span class="nx">LightMapPrototype</span><span class="p">.</span><span class="nx">createdCallback</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
+        <span class="kd">var</span> <span class="nx">div</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">&#39;div&#39;</span><span class="p">);</span>
+        <span class="kd">var</span> <span class="nx">zoom</span> <span class="o">=</span> <span class="mi">11</span><span class="p">;</span>
+        <span class="kd">var</span> <span class="nx">center</span> <span class="o">=</span> <span class="p">[</span> <span class="mf">116.404</span><span class="p">,</span> <span class="mf">39.915</span> <span class="p">];</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">setZoom</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">zoom</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
+            <span class="nx">map</span><span class="p">.</span><span class="nx">setZoom</span><span class="p">(</span><span class="nx">zoom</span><span class="p">);</span>
+        <span class="p">};</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">setCenter</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">center</span> <span class="o">=</span> <span class="nb">String</span><span class="p">(</span><span class="nx">value</span><span class="p">).</span><span class="nx">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">);</span>
+            <span class="nx">map</span><span class="p">.</span><span class="nx">setCenter</span><span class="p">(</span><span class="k">new</span> <span class="nx">BMap</span><span class="p">.</span><span class="nx">Point</span><span class="p">(</span><span class="nx">center</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nx">center</span><span class="p">[</span><span class="mi">1</span><span class="p">]));</span>
+        <span class="p">};</span>
+
+        <span class="nx">div</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">width</span> <span class="o">=</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">getAttribute</span><span class="p">(</span><span class="s1">&#39;width&#39;</span><span class="p">)</span> <span class="o">||</span> <span class="s1">&#39;300&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;px&#39;</span><span class="p">;</span>
+        <span class="nx">div</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">height</span> <span class="o">=</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">getAttribute</span><span class="p">(</span><span class="s1">&#39;height&#39;</span><span class="p">)</span> <span class="o">||</span> <span class="s1">&#39;300&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;px&#39;</span><span class="p">;</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">div</span><span class="p">);</span>
+
+        <span class="c1">// 判断当前的运行环境</span>
+        <span class="kd">var</span> <span class="nx">runtime</span> <span class="o">=</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">cordova</span> <span class="o">!=</span> <span class="s1">&#39;undefined&#39;</span><span class="p">)</span>
+                <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">light</span> <span class="o">!=</span> <span class="s1">&#39;undefined&#39;</span><span class="p">)</span> <span class="c1">// 有可能插件没有安装或者当前版本不支持</span>
+                <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">light</span><span class="p">.</span><span class="nx">map</span> <span class="o">!=</span> <span class="s1">&#39;undefined&#39;</span><span class="p">)</span> <span class="o">?</span> <span class="s1">&#39;cordova&#39;</span> <span class="o">:</span> <span class="s1">&#39;browser&#39;</span><span class="p">;</span>
+
+        <span class="kd">var</span> <span class="nx">map</span><span class="p">;</span>
+        <span class="k">switch</span> <span class="p">(</span><span class="nx">runtime</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">case</span> <span class="s1">&#39;cordova&#39;</span><span class="o">:</span>
+            <span class="kd">var</span> <span class="nx">obj</span> <span class="o">=</span> <span class="nx">div</span><span class="p">.</span><span class="nx">getBoundingClientRect</span><span class="p">()</span>
+            <span class="nx">light</span><span class="p">.</span><span class="nx">map</span><span class="p">.</span><span class="nx">init</span><span class="p">({</span>
+                <span class="nx">guid</span> <span class="o">:</span> <span class="nx">guid</span><span class="p">,</span>
+                <span class="nx">center</span> <span class="o">:</span> <span class="nx">center</span><span class="p">,</span>
+                <span class="nx">zoom</span> <span class="o">:</span> <span class="nx">zoom</span><span class="p">,</span>
+                <span class="nx">left</span> <span class="o">:</span> <span class="nx">obj</span><span class="p">.</span><span class="nx">left</span> <span class="o">+</span> <span class="nb">window</span><span class="p">.</span><span class="nx">pageXOffset</span><span class="p">,</span>
+                <span class="nx">top</span> <span class="o">:</span> <span class="nx">obj</span><span class="p">.</span><span class="nx">top</span> <span class="o">+</span> <span class="nb">window</span><span class="p">.</span><span class="nx">pageYOffset</span><span class="p">,</span>
+                <span class="nx">width</span> <span class="o">:</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">round</span><span class="p">(</span><span class="nx">obj</span><span class="p">.</span><span class="nx">width</span><span class="p">),</span>
+                <span class="nx">height</span> <span class="o">:</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">round</span><span class="p">(</span><span class="nx">obj</span><span class="p">.</span><span class="nx">height</span><span class="p">)</span>
+            <span class="p">});</span>
+
+            <span class="nx">instances</span><span class="p">[</span><span class="nx">guid</span><span class="p">]</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
+            <span class="nx">guid</span><span class="o">++</span><span class="p">;</span>
+            <span class="k">break</span><span class="p">;</span>
+        <span class="k">case</span> <span class="s1">&#39;browser&#39;</span><span class="o">:</span>
+            <span class="nx">map</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">BMap</span><span class="p">.</span><span class="nx">Map</span><span class="p">(</span><span class="nx">div</span><span class="p">);</span> <span class="c1">// 创建Map实例</span>
+            <span class="nx">map</span><span class="p">.</span><span class="nx">enableScrollWheelZoom</span><span class="p">();</span> <span class="c1">// 启用滚轮放大缩小</span>
+            <span class="nx">map</span><span class="p">.</span><span class="nx">addControl</span><span class="p">(</span><span class="k">new</span> <span class="nx">BMap</span><span class="p">.</span><span class="nx">ScaleControl</span><span class="p">());</span> <span class="c1">// 添加比例尺控件</span>
+            <span class="nx">map</span><span class="p">.</span><span class="nx">addControl</span><span class="p">(</span><span class="k">new</span> <span class="nx">BMap</span><span class="p">.</span><span class="nx">OverviewMapControl</span><span class="p">());</span> <span class="c1">// 添加缩略地图控件</span>
+            <span class="nx">map</span><span class="p">.</span><span class="nx">centerAndZoom</span><span class="p">(</span><span class="k">new</span> <span class="nx">BMap</span><span class="p">.</span><span class="nx">Point</span><span class="p">(</span><span class="nx">center</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nx">center</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="nx">zoom</span><span class="p">);</span> <span class="c1">// 初始化地图,设置中心点坐标和地图级别</span>
+
+            <span class="nx">map</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;moveend&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+                <span class="kd">var</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">map</span><span class="p">.</span><span class="nx">getCenter</span><span class="p">();</span>
+                <span class="nx">center</span> <span class="o">=</span> <span class="p">[</span> <span class="nx">value</span><span class="p">.</span><span class="nx">lng</span><span class="p">,</span> <span class="nx">value</span><span class="p">.</span><span class="nx">lat</span> <span class="p">];</span>
+                <span class="nx">self</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="nx">center</span><span class="p">);</span>
+                <span class="kd">var</span> <span class="nx">e</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createEvent</span><span class="p">(</span><span class="s1">&#39;Event&#39;</span><span class="p">);</span>
+                <span class="nx">e</span><span class="p">.</span><span class="nx">initEvent</span><span class="p">(</span><span class="s1">&#39;moveend&#39;</span><span class="p">,</span> <span class="kc">true</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+                <span class="nx">self</span><span class="p">.</span><span class="nx">dispatchEvent</span><span class="p">(</span><span class="nx">e</span><span class="p">);</span>
+            <span class="p">});</span>
+            <span class="nx">map</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;zoomend&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+                <span class="kd">var</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">map</span><span class="p">.</span><span class="nx">getZoom</span><span class="p">();</span>
+                <span class="nx">zoom</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
+                <span class="nx">self</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span><span class="s1">&#39;zoom&#39;</span><span class="p">,</span> <span class="nx">zoom</span><span class="p">);</span>
+                <span class="kd">var</span> <span class="nx">e</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createEvent</span><span class="p">(</span><span class="s1">&#39;Event&#39;</span><span class="p">);</span>
+                <span class="nx">e</span><span class="p">.</span><span class="nx">initEvent</span><span class="p">(</span><span class="s1">&#39;zoomend&#39;</span><span class="p">,</span> <span class="kc">true</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+                <span class="nx">self</span><span class="p">.</span><span class="nx">dispatchEvent</span><span class="p">(</span><span class="nx">e</span><span class="p">);</span>
+            <span class="p">});</span>
+
+            <span class="k">break</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">map</span> <span class="o">=</span> <span class="nx">map</span><span class="p">;</span>
+    <span class="p">};</span>
+    <span class="nx">LightMapPrototype</span><span class="p">.</span><span class="nx">attributeChangedCallback</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">attributeName</span><span class="p">,</span>
+            <span class="nx">oldValue</span><span class="p">,</span> <span class="nx">newValue</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
+        <span class="k">switch</span> <span class="p">(</span><span class="nx">attributeName</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">case</span> <span class="s1">&#39;center&#39;</span><span class="o">:</span>
+            <span class="nx">self</span><span class="p">.</span><span class="nx">setCenter</span><span class="p">(</span><span class="nx">newValue</span><span class="p">);</span>
+            <span class="k">break</span><span class="p">;</span>
+        <span class="k">case</span> <span class="s1">&#39;zoom&#39;</span><span class="o">:</span>
+            <span class="nx">self</span><span class="p">.</span><span class="nx">setZoom</span><span class="p">(</span><span class="nx">newValue</span><span class="p">);</span>
+            <span class="k">break</span><span class="p">;</span>
+        <span class="k">default</span><span class="o">:</span>
+            <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+    <span class="p">};</span>
+    <span class="nb">document</span><span class="p">.</span><span class="nx">registerElement</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">registerElement</span> <span class="o">||</span> <span class="nb">document</span><span class="p">.</span><span class="nx">register</span><span class="p">;</span>
+    <span class="kd">function</span> <span class="nx">init</span><span class="p">()</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">LightMap</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">registerElement</span><span class="p">(</span><span class="s1">&#39;light-map&#39;</span><span class="p">,</span> <span class="p">{</span>
+            <span class="nx">prototype</span> <span class="o">:</span> <span class="nx">LightMapPrototype</span>
+        <span class="p">});</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">cordova</span> <span class="o">!=</span> <span class="s1">&#39;undefined&#39;</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nb">document</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;deviceready&#39;</span><span class="p">,</span> <span class="nx">init</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span> <span class="c1">// 等待设备初始化完成</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="nx">init</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}();</span>
+</code></pre></div>
+<h4>调试</h4>
+
+<p><a href="http://ripple.incubator.apache.org/">Ripple</a></p>
+
+<ul>
+<li> 这是一款能在浏览器里模拟移动设备的调试工具，包括模拟 GPS、陀螺仪 等本地能力</li>
+</ul>
+
+<p><a href="http://people.apache.org/%7Epmuellr/weinre/">Weinre</a></p>
+
+<ul>
+<li>能够在 Chrome 开发者工具里，远程调试的工具</li>
+<li>优势：适用各种设备和浏览器</li>
+<li>不足：加载之前的状态不能获知、不能断点调试</li>
+</ul>
+
+<p><a href="https://developers.google.com/chrome-developer-tools/docs/remote-debugging">Remote Debug</a></p>
+
+<ul>
+<li>iOS 6 和 Android 4.4 开始，可以原生适用 Remote Debug</li>
+<li>Android 4.4 不仅能打断点，而且还能映射 Web UI （Chrome dev 版本才支持）。</li>
+</ul>
+
+<p>另外大家在移动端还用过啥 NB 的调试工具，欢迎留言推荐</p>
+
+<h4>安全考虑</h4>
+
+<p>用户主动操作才开启重要功能</p>
+
+<ul>
+<li>类似 Flash 里访问剪贴板，需要用户主动 Click 才可以访问</li>
+<li>相比弹出个小黄条让用户授权，这种设计体验要好很多</li>
+</ul>
+
+<p>明确提示状态</p>
+
+<ul>
+<li>如：录音和录像时，有明确的状态显示</li>
+</ul>
+
+<h3>参考资料</h3>
+
+<ul>
+<li><a href="http://www.qconbeijing.com/node/535">本期分享 QCon 链接</a></li>
+<li><a href="http://www.techweb.com.cn/data/2014-01-20/1383076.shtml">艾瑞：2013中国移动互联网市场规模1059亿</a></li>
+<li><a href="http://www.visionmobile.com/blog/2013/12/html5-performance-is-fine-what-we-are-missing-is-tools/">HTML5 performance is fine, what we are missing is tools</a></li>
+<li><a href="http://www.cnbeta.com/articles/161452.htm">Adobe 将停止开发移动版 Flash</a></li>
+<li><a href="http://techcrunch.cn/2013/09/24/say-goodbye-to-npapi/">Google将于2014年1月开始屏蔽NPAPI插件</a></li>
+<li><a href="http://www.imooc.com/view/92">When iOS loves JS</a></li>
+<li><a href="https://github.com/MobileChromeApps/mobile-chrome-apps">Chrome apps on Android and iOS</a></li>
+<li><a href="http://baike.baidu.com/view/9876268.htm">响应式网页设计</a></li>
+<li><a href="http://www.w3.org/TR/components-intro/">Web Components</a></li>
+<li><a href="http://www.polymer-project.org">Polymer</a></li>
+<li><a href="http://ripple.incubator.apache.org/">Ripple</a></li>
+<li><a href="http://people.apache.org/%7Epmuellr/weinre/">Weinre</a></li>
+<li><a href="https://developers.google.com/chrome-developer-tools/docs/remote-debugging">Remote Debug</a></li>
+<li><a href="http://stackoverflow.com/questions/17695875/how-to-use-ripple-emulator-for-windows-to-test-phonegap-application">How to use Ripple Emulator for Windows to test PhoneGap application?</a></li>
+</ul>
+
+        </div>
+
+        <div class="author">
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+                作者：<a href="http://weibo.com/zswang" target="_blank">zswang (http://weibo.com/zswang)</a> - 站在巨人的肩上也要成为巨人的一部分 <br/>
+                <a href="http://weibo.com/zswang" target="_blank"></a> <br/>
+                <!-- <a href="/posts/#zswang">查看他|她写的全部文章</a>  |   -->
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+        </div>
+
+        <!-- Duoshuo Comment BEGIN -->
+<a name="comments"> </a>
+<div id="comment">
+    <div class="ds-thread" data-title="跨端组件实践 - 移动时代的前端"></div>
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:"fex"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = 'http://static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+        || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+    </script>
+</div>
+<!-- Duoshuo Comment END -->
+
+    </article>
+
+    <div class="page-sidebar">
+    <!-- <div>
+        <img src="/public/images/formula.png" />
+    </div> -->
+
+    <ul class="github-projects">
+        
+            <li><a href="https://github.com/fex-team/fis-plus" target="_blank">FIS - 前端集成解决方案</a></li>
+        
+            <li><a href="https://github.com/fex-team/kityformula" target="_blank">KityFormula - 公式展现和编辑</a></li>
+        
+            <li><a href="https://github.com/fex-team/kityminder" target="_blank">KityMinder - 思维导图编辑器</a></li>
+        
+            <li><a href="https://github.com/fex-team/ufinder" target="_blank">UFinder - 文件管理工具</a></li>
+        
+            <li><a href="https://github.com/fex-team/ueditor" target="_blank">UEditor - 富文本编辑器</a></li>
+        
+            <li><a href="https://github.com/fex-team/webuploader" target="_blank">WebUploader - 文件上传组件</a></li>
+        
+            <li><a href="https://github.com/fex-team/gmu" target="_blank">GMU - 轻量级的移动端UI组件库</a></li>
+        
+    </ul>
+
+    <div style="text-align:center;margin:30px 0;"><img src="/public/images/erwei.png" /></div>
+
+    <div class="last-comments">
+        <!-- 多说最新评论 start -->
+        <div class="ds-recent-comments" data-num-items="10" data-show-avatars="1" data-show-time="1" data-show-title="1" data-show-admin="1" data-excerpt-length="70"></div>
+        <!-- 多说最新评论 end -->
+        <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+        <script type="text/javascript">
+        var duoshuoQuery = {short_name:"fex"};
+            (function() {
+                var ds = document.createElement('script');
+                ds.type = 'text/javascript';ds.async = true;
+                ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+                ds.charset = 'UTF-8';
+                (document.getElementsByTagName('head')[0] 
+                 || document.getElementsByTagName('body')[0]).appendChild(ds);
+            })();
+        </script>
+        <!-- 多说公共JS代码 end -->
+    </div>
+</div>
+
+
+</div>
+
+
+<div class="page-footer">
+    <div class="foot-inner">
+    <dl>
+        <dt>友情链接</dt>
+        <dd>
+            <ul>
+                <li><a href="http://mux.baidu.com/" target="_blank">百度 MUX</a></li>
+                <li><a href="http://mweb.baidu.com/" target="_blank">百度 MWEB</a></li>
+                <li><a href="http://ued.taobao.org/blog/" target="_blank">淘宝 UED</a></li>
+                <li><a href="http://www.75team.com/" target="_blank">奇舞团</a></li>
+                <li><a href="http://www.w3ctech.com" target="_blank">w3ctech</a></li>
+                <li><a href="http://www.alloyteam.com/" target="_blank">腾讯 AlloyTeam</a></li>
+                <li><a href="http://isux.tencent.com/" target="_blank">腾讯 ISUX</a></li>
+                <li><a href="http://ued.ctrip.com/blog/?cat=11" target="_blank">携程 UED</a></li>
+            <ul>
+        </dd>
+    </dl>
+
+    <dl>
+        <dt>我们的项目</dt>
+        <dd>
+            <ul>
+                
+                    <li><a href="http://github.com/fex-team/fis-plus/" target="_blank">FIS</a></li>
+                
+                    <li><a href="http://github.com/fex-team/kityformula/" target="_blank">KityFormula</a></li>
+                
+                    <li><a href="http://naotu.baidu.com/" target="_blank">KityMinder</a></li>
+                
+                    <li><a href="http://github.com/fex-team/ufinder/" target="_blank">UFinder</a></li>
+                
+                    <li><a href="http://github.com/fex-team/ueditor/" target="_blank">UEditor</a></li>
+                
+                    <li><a href="http://fex.baidu.com/webuploader" target="_blank">WebUploader</a></li>
+                
+                    <li><a href="http://gmu.baidu.com" target="_blank">GMU</a></li>
+                
+            <ul>
+        </dd>
+    </dl>
+
+    <dl>
+        <dt>加入我们</dt>
+        <dd>
+            <p>FEX 是百度「Web 前端研发部」的内部名称，其中 FE 是 Front End 的缩写，X 代表我们不仅关注前端技术，还更重视全端及全栈的能力。</p>
+
+            <p>如果你对这个团队感兴趣，可以<a href="/we-need-you/">【更多了解一下】</a>。</p>
+        </dd>
+    </dl>
+    </div>
+</div>
+
+
+
+<script>
+    var page = "/blog/2014/05/light-component";
+</script>
+<script type="text/javascript" src="/public/js/fex.alog.monk.js?t=201404171736"></script>
+
+
+<script type="text/javascript">
+    //设置站外链接新页面打开
+    var a_list= document.getElementsByTagName("a"); 
+    for(var i=0;i<a_list.length;i++){  
+        var href = a_list[i].href;
+        if( href && String(href).indexOf("fex.baidu.com") < 0 ){  
+            a_list[i].target = "_blank";
+        }  
+    } 
+</script>
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+    var domain = document.domain;
+    if(domain === "fex.baidu.com") {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?5cfaa6810a02b4f45dc2c55614d98f57";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    }
+})();
+</script>
+</body>
+</html>
+
