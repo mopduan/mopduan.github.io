@@ -267,8 +267,12 @@ article {
         color: #ff6136; }
 
 .page-footer {
-  border-top: 1px solid #d9d8d8;
-  background: #f0f0f0; }
+  text-align: center;
+  border-top: 1px solid #d9d8d8;}
+  .page-footer{
+
+  color: #999999; 
+  }
   .page-footer .foot-inner {
     width: 1200px;
     margin: 10px auto;
