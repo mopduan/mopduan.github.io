@@ -17,14 +17,7 @@
     </dl>
 
     <dl>
-        <dt>我的项目</dt>
-        <dd>
-            <ul>
-                {% for project in site.data.projects %}
-                    <li><a {% if project.url %}href="{{project.url}}"{% else %}href="http://github.com/skyaspnet/{{project.github}}/"{% endif %} target="_blank">{{project.name}}</a></li>
-                {% endfor %}
-            <ul>
-        </dd>
+        <dt>关于本站</dt>        <dd style="text-align:center;">powered by skyaspnet 感谢<a href="http://fex.baidu.com/" target="_blank">Baidu FEX</a>提供的模板</dd
     </dl>
  </div>
 </div>

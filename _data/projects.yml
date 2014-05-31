@@ -2,3 +2,8 @@
   desc: 腾讯问问 & 百科前端自动化构建工具
   github: wenke
   recommend: true
+
+- name: baidu_pcs_sdk
+  desc: 百度个人云存储PHP SDK
+  github: baidu_pcs_sdk
+  recommend: true 
