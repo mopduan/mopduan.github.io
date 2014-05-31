@@ -1,5 +1,4 @@
-- name: FIS
-  desc: 前端集成解决方案
-  github: fis-plus
+- name: wenke
+  desc: 腾讯问问 & 百科前端自动化构建工具
+  github: wenke
   recommend: true
-  banner: 3d7823

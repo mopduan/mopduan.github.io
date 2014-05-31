@@ -17,11 +17,11 @@
     </dl>
 
     <dl>
-        <dt>我们的项目</dt>
+        <dt>我的项目</dt>
         <dd>
             <ul>
                 {% for project in site.data.projects %}
-                    <li><a {% if project.url %}href="{{project.url}}"{% else %}href="http://github.com/fex-team/{{project.github}}/"{% endif %} target="_blank">{{project.name}}</a></li>
+                    <li><a {% if project.url %}href="{{project.url}}"{% else %}href="http://github.com/skyaspnet/{{project.github}}/"{% endif %} target="_blank">{{project.name}}</a></li>
                 {% endfor %}
             <ul>
         </dd>
