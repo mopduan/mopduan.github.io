@@ -1,6 +1,6 @@
 ---
 layout: post
-title: The limit of cookies's length
+title: 关于不同浏览器下Cookie内容长度限制的测试
 author: mop
 shortname: cookies-length-limit
 ---

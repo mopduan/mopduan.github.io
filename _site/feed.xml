@@ -7,7 +7,7 @@
         <atom:link href="http://fex.baidu.com/feed.xml" rel="self" type="application/rss+xml" />
         
             <item>
-                <title>The limit of cookies&#39;s length</title>
+                <title>关于不同浏览器下Cookie内容长度限制的测试</title>
                 <description>&lt;p&gt;由于项目的需要，进行一个COOKIE内容长度的限制测试，作一个记录供参考，测试设计如下，分两种情况：&lt;/p&gt;
 
 &lt;p&gt;&amp;nbsp; (1) 当前页面未设置同名Cookie的情况；&lt;/p&gt;
