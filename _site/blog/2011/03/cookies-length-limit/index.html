@@ -30,7 +30,7 @@
         <li><a href="https://github.com/skyaspnet/" target="_blank">Github</a></li>
         <li><a href="https://speakerdeck.com/skyaspnet" target="_blank">Slides</a></li>
     </ul>
-    <a class="rss" target="_blank" href="http://skyaspnet.github.io/feed.xml"></a>
+    <a class="rss" target="_blank" href="/feed.xml"></a>
 </div>
 
 
@@ -126,6 +126,10 @@
         
             <li><a href="https://github.com/skyaspnet/wenke" target="_blank">wenke - 腾讯问问 & 百科前端自动化构建工具</a></li>
         
+            <li><a href="https://github.com/skyaspnet/mcheerio" target="_blank">mcheerio - fix some issues for cheerio</a></li>
+        
+            <li><a href="https://github.com/skyaspnet/wenke-monitor" target="_blank">wenke-monitor - 腾讯问问 & 百科 前端页面监控</a></li>
+        
             <li><a href="https://github.com/skyaspnet/baidu_pcs_sdk" target="_blank">baidu_pcs_sdk - 百度个人云存储PHP SDK</a></li>
         
             <li><a href="https://github.com/skyaspnet/tconverter" target="_blank">tconverter - Tapestry 转 velocity 工具 （C#）</a></li>
@@ -154,9 +158,9 @@ var page = "/blog/2011/03/cookies-length-limit";
 //设置站外链接新页面打开
 var a_list = document.getElementsByTagName("a");
 for (var i = 0; i < a_list.length; i++) {
-    var href = a_list[i].href;
-    if (href && String(href).indexOf("skyaspnet.github.io") < 0) {
-        a_list[i].target = "_blank";
+    var href = a_list[i];
+    if (href.hostname.indexOf(location.hostname) < 0) {
+        href.target = "_blank";
     }
 }
 </script>

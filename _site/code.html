@@ -30,10 +30,14 @@
         <li><a href="https://github.com/skyaspnet/" target="_blank">Github</a></li>
         <li><a href="https://speakerdeck.com/skyaspnet" target="_blank">Slides</a></li>
     </ul>
-    <a class="rss" target="_blank" href="http://skyaspnet.github.io/feed.xml"></a>
+    <a class="rss" target="_blank" href="/feed.xml"></a>
 </div>
 
 
+
+    
+
+    
 
     
 
@@ -58,9 +62,9 @@ var page = "/code.html";
 //设置站外链接新页面打开
 var a_list = document.getElementsByTagName("a");
 for (var i = 0; i < a_list.length; i++) {
-    var href = a_list[i].href;
-    if (href && String(href).indexOf("skyaspnet.github.io") < 0) {
-        a_list[i].target = "_blank";
+    var href = a_list[i];
+    if (href.hostname.indexOf(location.hostname) < 0) {
+        href.target = "_blank";
     }
 }
 </script>

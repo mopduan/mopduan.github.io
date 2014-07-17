@@ -15,9 +15,9 @@ var page = "{{page.url}}";
 //设置站外链接新页面打开
 var a_list = document.getElementsByTagName("a");
 for (var i = 0; i < a_list.length; i++) {
-    var href = a_list[i].href;
-    if (href && String(href).indexOf("skyaspnet.github.io") < 0) {
-        a_list[i].target = "_blank";
+    var href = a_list[i];
+    if (href.hostname.indexOf(location.hostname) < 0) {
+        href.target = "_blank";
     }
 }
 </script>
