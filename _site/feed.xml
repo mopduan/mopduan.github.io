@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>mop</title>
         <description></description>      
         <link>http://skyaspnet.github.io/</link>
-        <atom:link href="http://skyaspnet.github.io//feed.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="http://skyaspnet.github.io/feed.xml" rel="self" type="application/rss+xml" />
         
             <item>
                 <title>关于不同浏览器下Cookie内容长度限制的测试</title>
