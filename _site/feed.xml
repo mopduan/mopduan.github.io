@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
-        <title>FEX 百度 Web 前端研发部</title>
+        <title>mop</title>
         <description></description>      
-        <link>http://fex.baidu.com</link>
-        <atom:link href="http://fex.baidu.com/feed.xml" rel="self" type="application/rss+xml" />
+        <link>http://skyaspnet.github.io/</link>
+        <atom:link href="http://skyaspnet.github.io//feed.xml" rel="self" type="application/rss+xml" />
         
             <item>
                 <title>关于不同浏览器下Cookie内容长度限制的测试</title>
@@ -45,8 +45,8 @@
 &lt;p&gt;仅供参考，希望对大家有帮助。&lt;/p&gt;
 </description>
                 <pubDate>Tue, 15 Mar 2011 00:00:00 +0800</pubDate>
-                <link>http://fex.baidu.com/blog/2011/03/cookies-length-limit</link>
-                <guid isPermaLink="true">http://fex.baidu.com/blog/2011/03/cookies-length-limit</guid>
+                <link>http://skyaspnet.github.io//blog/2011/03/cookies-length-limit</link>
+                <guid isPermaLink="true">http://skyaspnet.github.io//blog/2011/03/cookies-length-limit</guid>
             </item>
         
     </channel>
