@@ -1,3 +1,4 @@
+pygments: true
 name: mop
 url: http://skyaspnet.github.io/
 source:      .
