@@ -17,8 +17,3 @@
   desc: 百度个人云存储PHP SDK
   github: baidu_pcs_sdk
   recommend: true 
-
-- name: tconverter
-  desc: Tapestry 转 velocity 工具 （C#）
-  github: tconverter
-  recommend: true
