@@ -17,7 +17,7 @@ page_id: about
 + 2012年3月 至 2013年7月  就职于 <a href="http://www.baidu.com/" target="_blank">百度在线网络技术（北京）有限公司</a> 移动云计算事业部
 
 ###实习工作经历
-+ 2011年8月 至 2011年11月 全职实习于<a href="http://www.tencent.com/" target="_blank">腾讯科技（深圳）有限公司</a> QZONE
++ 2011年8月 至 2011年11月 全职实习于<a href="http://www.tencent.com/" target="_blank">腾讯科技（深圳）有限公司</a> QQ空间
 
 + 2010年7月 至 2011年7月 全职实习于 <a href="http://www.snda.com/" target="_blank">上海盛大网络发展有限公司</a> 盛大在线
 
