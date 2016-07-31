@@ -2,3 +2,4 @@
 #忽略gitignore文件
 .gitignore
 _site
+.idea
