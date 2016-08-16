@@ -1,4 +1,0 @@
-skyaspnet.github.io
-===================
-
-resume
